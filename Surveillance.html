@@ -1,0 +1,25 @@
+<img src="/video_feed" width="640" height="480">
+
+<script>
+function loadRecords() {
+  fetch("/api/records")
+    .then(res => res.json())
+    .then(data => {
+      let tbody = document.querySelector("tbody");
+      tbody.innerHTML = "";
+      data.forEach(r => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${r.id}</td>
+            <td>${r.date}</td>
+            <td>${r.day}</td>
+            <td>${r.time}</td>
+            <td>${r.location}</td>
+            <td>${r.count}</td>
+          </tr>`;
+      });
+    });
+}
+loadRecords();
+setInterval(loadRecords, 5000);
+</script>
